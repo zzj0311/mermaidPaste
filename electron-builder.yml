@@ -1,0 +1,31 @@
+appId: com.example.mermaid-paste
+productName: Mermaid Paste
+artifactName: ${productName}-${version}-portable.${ext}
+asar: true
+
+files:
+  - dist/**/*
+  - resources/**/*
+  - assets/**/*
+  - package.json
+
+extraResources:
+  - from: resources
+    to: resources
+    filter: ["**/*"]
+  - from: assets
+    to: assets
+    filter: ["**/*"]
+
+win:
+  target:
+    - target: portable
+      arch:
+        - x64
+  # icon: assets/icon.ico   # drop a 256x256+ .ico here before distributing
+
+portable:
+  artifactName: ${productName}-${version}-portable.${ext}
+
+directories:
+  output: release

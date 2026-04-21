@@ -1,0 +1,36 @@
+{
+  "name": "mermaid-paste",
+  "productName": "Mermaid Paste",
+  "version": "0.1.0",
+  "description": "Electron tray app: hotkey reads mermaid text from the clipboard and writes a hi-res PNG + EMF back so Office/Visio can paste as editable vector shapes.",
+  "main": "dist/main.js",
+  "author": "",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "clean": "rimraf dist",
+    "build:main": "tsc -p tsconfig.json",
+    "build:renderer": "esbuild src/renderer/renderer.ts --bundle --platform=browser --format=iife --outfile=dist/renderer/renderer.js",
+    "copy:assets": "node scripts/copy-assets.mjs",
+    "build": "npm run clean && npm run build:main && npm run build:renderer && npm run copy:assets",
+    "start": "npm run build && electron .",
+    "dev": "npm run build && electron . --inspect",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "dist": "npm run build && electron-builder --win --x64",
+    "dist:cached": "npm run build && ELECTRON_MIRROR=file://$(pwd)/electron-cache/ ELECTRON_CUSTOM_DIR=v33.4.11 electron-builder --win --x64"
+  },
+  "dependencies": {
+    "mermaid": "^11.4.1"
+  },
+  "optionalDependencies": {
+    "@nut-tree-fork/nut-js": "^4.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.9",
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8",
+    "esbuild": "^0.24.0",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.7.2"
+  }
+}

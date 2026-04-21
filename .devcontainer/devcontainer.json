@@ -1,0 +1,20 @@
+{
+  "name": "vscode-stitch-ext (Node dev)",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:20-bullseye",
+  // "workspaceFolder": "/workspaces/${localWorkspaceFolderName}",
+  // "remoteUser": "node",
+  // "features": {
+  //   "ghcr.io/devcontainers/features/git:1": {}
+  // },
+  "customizations": {
+    "vscode": {
+      "extensions": []
+    }
+  },
+  "postCreateCommand": "echo 'Devcontainer created. Add package.json to enable npm install.'",
+  "postStartCommand": "if [ -f package.json ] && [ ! -d node_modules ]; then npm install; else echo 'npm install skipped (no package.json or node_modules already present).'; fi",
+  "mounts": [
+    "source=mermaid2Vsdx_home,target=/home/vscode,type=volume",
+    "source=node_opt,target=/opt,type=volume"
+  ]
+}
